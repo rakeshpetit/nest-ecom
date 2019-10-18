@@ -14,5 +14,13 @@ yarn add -D @types/mongoose
 2.yarn add dotenv
 3.yarn add -D @types/dotenv
 
+#Test server
+yarn test
+yarn test:e2e
+
 #Start server
+yarn start
 yarn start:dev
+
+#Test endpoints
+curl 'http://localhost:3000'
