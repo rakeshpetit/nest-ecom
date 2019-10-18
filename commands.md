@@ -36,3 +36,29 @@ yarn add -D @types/bcrypt
 #Create auth module
 nest g module auth
 nest g controller auth
+
+#Architecture of API
+AppModule
+    modules 
+        MongooseModule - forRoot to connect to mongodb
+        SharedModule 
+        AuthModule
+    controllers
+        AppController - uses AppService for getHello method
+    services
+        AppService - Injectable with getHello method
+
+SharedModule
+    modules
+        MongooseModule - forFeature with schema access
+    services
+        UserService - Injectable with methods for create user, login user
+            get data from mongoose to create/login users. Instantiate mongoose model
+            via constructor 
+
+AuthModule
+    modules
+        SharedModule
+    controllers
+        AuthController - provide routes for login and register. Instantiate 
+            UserService via constructor.
