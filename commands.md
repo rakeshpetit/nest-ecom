@@ -24,3 +24,15 @@ yarn start:dev
 
 #Test endpoints
 curl 'http://localhost:3000'
+
+#Create shared module
+nest g module shared
+nest g service shared/user
+
+#bcrypt for encrypting auth
+yarn add bcrypt
+yarn add -D @types/bcrypt
+
+#Create auth module
+nest g module auth
+nest g controller auth
