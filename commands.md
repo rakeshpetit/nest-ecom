@@ -37,6 +37,13 @@ yarn add -D @types/bcrypt
 nest g module auth
 nest g controller auth
 
+#Add passport js
+yarn add @nestjs/passport passport passport-jwt
+yarn add -D @types/passport @types/passport-jwt
+
+#Create auth service
+nest g service auth
+
 #Architecture of API
 AppModule
     modules 

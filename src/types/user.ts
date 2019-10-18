@@ -9,7 +9,7 @@ interface Address {
     zip: string;
 }
 export interface User extends Document {
-  name: string;
+  username: string;
   readonly password: string;
   seller: boolean;
   address: Address;
