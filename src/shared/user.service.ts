@@ -11,7 +11,8 @@ export class UserService {
   constructor(@InjectModel('User') private userModel: Model<User>) {}
 
   private sanitizeUser(user: User) {
-    return user.depopulate('password');
+    const { password, ...sanitizedUser } = user.toObject();
+    return sanitizedUser;
   }
 
   async create(userDTO: RegisterDTO) {
