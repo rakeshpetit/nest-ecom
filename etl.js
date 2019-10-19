@@ -1,21 +1,22 @@
 const axios = require('axios');
 
 (async () => {
-  try {
-    const {
-      data: { token },
-    } = await axios.post('http://localhost:3000/auth/register', {
-      username: 'rakesh',
-      password: 'raku12345',
-    });
-    console.log(token);
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   const {
+  //     data: { token },
+  //   } = await axios.post('http://localhost:3000/auth/register', {
+  //     username: 'rakesh',
+  //     password: 'raku12345',
+  //     seller: true
+  //   });
+  //   console.log(token);
+  // } catch (err) {
+  //   console.log(err);
+  // }
   const {
     data: { token },
   } = await axios.post('http://localhost:3000/auth/login', {
-    username: 'rakesh',
+    username: 'rakseller',
     password: 'raku12345',
   });
   console.log(token);

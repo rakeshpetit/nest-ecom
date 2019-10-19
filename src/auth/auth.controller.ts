@@ -1,8 +1,10 @@
+import { SellerGuard } from './../guards/seller.guard';
 import { AuthService } from './auth.service';
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { UserService } from '../shared/user.service';
 import { RegisterDTO, LoginDTO } from './../auth/auth.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from '../utils/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -12,9 +14,9 @@ export class AuthController {
   ) {}
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
-  tempAuth() {
-    return { auth: 'works' };
+  @UseGuards(AuthGuard('jwt'), SellerGuard)
+  async findAll(@User() user: any) {
+    return await this.userService.findAll();
   }
 
   @Post('login')
