@@ -38,8 +38,8 @@ describe('AUTH', () => {
       .send(user)
       .expect(({ body }) => {
         expect(body.token).toBeDefined();
-        expect(body.user.username).toEqual('username');
-        expect(body.user.password).toBeUndefined();
+        expect(body.username).toEqual('username');
+        expect(body.password).toBeUndefined();
       })
       .expect(HttpStatus.CREATED);
   });
@@ -71,8 +71,8 @@ describe('AUTH', () => {
       .send(user)
       .expect(({ body }) => {
         expect(body.token).toBeDefined();
-        expect(body.user.username).toEqual('username');
-        expect(body.user.password).toBeUndefined();
+        expect(body.username).toEqual('username');
+        expect(body.password).toBeUndefined();
       })
       .expect(HttpStatus.CREATED);
   });
