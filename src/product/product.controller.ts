@@ -58,7 +58,7 @@ export class ProductController {
     @Body() product: UpdateProductDTO,
     @User() user: UserDocument,
   ): Promise<Product> {
-    const {id: userId} = user;
+    const { id: userId } = user;
     return await this.productService.update(id, product, userId);
   }
 
