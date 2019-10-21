@@ -1,3 +1,4 @@
+import { User } from './../types/user';
 import { CreateProductDTO, UpdateProductDTO } from './product.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -16,8 +17,11 @@ export class ProductService {
     return await this.productModel.findById(id).populate('owner');
   }
 
-  async create(productDTO: CreateProductDTO): Promise<Product> {
-    const product = await this.productModel.create(productDTO);
+  async create(productDTO: CreateProductDTO, user: User): Promise<Product> {
+    const product = await this.productModel.create({
+      ...productDTO,
+      owner: user,
+    });
     return await product.save();
   }
 
