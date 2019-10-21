@@ -38,12 +38,13 @@ beforeAll(async () => {
   await mongoose.connect(process.env.MONGO_URI);
   await mongoose.connection.db.dropDatabase();
   const {
-    data: { token: sellerToken },
+    data: { token: sellerTokenDestr },
   } = await axios.post(`${app}/auth/register`, productSeller);
   const {
-    data: { token: buyerToken },
+    data: { token: buyerTokenDestr },
   } = await axios.post(`${app}/auth/register`, productBuyer);
-  //   buyerToken = token;
+  buyerToken = buyerTokenDestr;
+  sellerToken = sellerTokenDestr;
   const [{ data: data1 }, { data: data2 }] = await Promise.all(
     soldProducts.map(product =>
       axios.post(`${app}/product`, product, {
@@ -59,7 +60,46 @@ afterAll(async done => {
 });
 
 describe('ORDER', () => {
-  it('should create order of all products', () => {});
-  it('should list all orders of buyers', () => {});
-  it('should create order of all products', () => {});
+  it('should create order of all products', () => {
+    const orderDTO = {
+      products: boughtProducts.map(product => ({
+        product: product._id,
+        quantity: 1,
+      })),
+    };
+    return request(app)
+      .post('/order')
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${buyerToken}`)
+      .send(orderDTO)
+      .expect(({ body }) => {
+        expect(body.owner.username).toEqual(productBuyer.username);
+        expect(body.products.length).toEqual(boughtProducts.length);
+        expect(
+          boughtProducts
+            .map(product => product._id)
+            .includes(body.products[0]._id),
+        ).toBeTruthy();
+        expect(body.totalPrice).toEqual(
+          boughtProducts.reduce((acc, product) => acc + product.price, 0),
+        );
+      })
+      .expect(201);
+  });
+  it('should list all orders of buyers', () => {
+    return request(app)
+      .get('/order')
+      .set('Authorization', `Bearer ${buyerToken}`)
+      .expect(({ body }) => {
+        expect(body.length).toEqual(1);
+        expect(body[0].products.length).toEqual(boughtProducts.length);
+        expect(
+          boughtProducts
+            .map(product => product._id)
+            .includes(body[0].products[0]._id),
+        ).toBeTruthy();
+      })
+      .expect(200);
+  });
+  // it('should create order of all products', () => {});
 });
