@@ -13,11 +13,11 @@ export class AuthController {
     private authService: AuthService,
   ) {}
 
-  @Get()
-  @UseGuards(AuthGuard('jwt'), SellerGuard)
-  async findAll(@User() user: any) {
-    return await this.userService.findAll();
-  }
+  // @Get()
+  // @UseGuards(AuthGuard('jwt'), SellerGuard)
+  // async findAll(@User() user: any) {
+  //   return await this.userService.findAll();
+  // }
 
   @Post('login')
   async login(@Body() userDTO: LoginDTO) {
