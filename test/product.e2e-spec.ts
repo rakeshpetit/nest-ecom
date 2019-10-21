@@ -1,5 +1,5 @@
 import { HttpStatus } from '@nestjs/common';
-import { CreateProductDTO } from './../dist/product/product.dto.d';
+import { CreateProductDTO } from '../src/product/product.dto';
 import { RegisterDTO } from './../src/auth/auth.dto';
 import * as mongoose from 'mongoose';
 import axios from 'axios';

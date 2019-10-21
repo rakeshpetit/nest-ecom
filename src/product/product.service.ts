@@ -2,7 +2,7 @@ import { User } from './../types/user';
 import { CreateProductDTO, UpdateProductDTO } from './product.dto';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Product } from 'src/types/Product';
+import { Product } from '../types/Product';
 import { Model } from 'mongoose';
 
 @Injectable()
