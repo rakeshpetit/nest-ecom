@@ -21,7 +21,7 @@ const axios = require('axios');
   });
   console.log(token);
   try {
-    const { data } = await axios.get('http://localhost:3000/api/auth', {
+    const { data } = await axios.get('http://localhost:3000/api/product', {
       headers: { authorization: `Bearer ${token}` },
     });
     console.log(data);

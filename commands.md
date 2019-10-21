@@ -49,6 +49,11 @@ nest g module product
 nest g controller product
 nest g service product
 
+#Create order module
+nest g module order
+nest g controller order
+nest g service order
+
 #Architecture of API
 AppModule
     modules 
