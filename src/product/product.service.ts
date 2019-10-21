@@ -17,8 +17,15 @@ export class ProductService {
     return await this.productModel.find({ ownder: userId }).populate('owner');
   }
 
-  async findOne(id: string): Promise<Product> {
-    return await this.productModel.findById(id).populate('owner');
+  async findById(id: string): Promise<Product> {
+    const product = await this.productModel.findById(id).populate('owner');
+    if (!product) {
+      throw new HttpException(
+        'Product does not exist',
+        HttpStatus.NO_CONTENT,
+      );
+    }
+    return product;
   }
 
   async create(productDTO: CreateProductDTO, user: User): Promise<Product> {
@@ -42,7 +49,8 @@ export class ProductService {
         HttpStatus.UNAUTHORIZED,
       );
     }
-    return await product.update(productDTO).populate('owner');
+    await product.updateOne(productDTO);
+    return await this.findById(id);
   }
 
   async delete(id: string, userId: string): Promise<Product> {

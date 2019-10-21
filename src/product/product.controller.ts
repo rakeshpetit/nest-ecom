@@ -48,7 +48,7 @@ export class ProductController {
 
   @Get(':id')
   async read(@Param('id') id: string): Promise<Product> {
-    return await this.productService.findOne(id);
+    return await this.productService.findById(id);
   }
 
   @Put(':id')

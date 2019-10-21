@@ -108,4 +108,10 @@ describe('AUTH', () => {
       })
       .expect(HttpStatus.CREATED);
   });
+  it('should respect seller token', () => {
+    return request(app)
+      .get('/product/mine')
+      .set('Authorization', `Bearer ${sellerToken}`)
+      .expect(200);
+  });
 });
