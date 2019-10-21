@@ -4,7 +4,7 @@ const axios = require('axios');
   // try {
   //   const {
   //     data: { token },
-  //   } = await axios.post('http://localhost:3000/auth/register', {
+  //   } = await axios.post('http://localhost:3000/api/auth/register', {
   //     username: 'rakesh',
   //     password: 'raku12345',
   //     seller: true
@@ -15,13 +15,13 @@ const axios = require('axios');
   // }
   const {
     data: { token },
-  } = await axios.post('http://localhost:3000/auth/login', {
+  } = await axios.post('http://localhost:3000/api/auth/login', {
     username: 'rakseller',
     password: 'raku12345',
   });
   console.log(token);
   try {
-    const { data } = await axios.get('http://localhost:3000/auth', {
+    const { data } = await axios.get('http://localhost:3000/api/auth', {
       headers: { authorization: `Bearer ${token}` },
     });
     console.log(data);
