@@ -78,7 +78,7 @@ describe('ORDER', () => {
         expect(
           boughtProducts
             .map(product => product._id)
-            .includes(body.products[0]._id),
+            .includes(body.products[0].product._id),
         ).toBeTruthy();
         expect(body.totalPrice).toEqual(
           boughtProducts.reduce((acc, product) => acc + product.price, 0),
@@ -96,7 +96,7 @@ describe('ORDER', () => {
         expect(
           boughtProducts
             .map(product => product._id)
-            .includes(body[0].products[0]._id),
+            .includes(body[0].products[0].product._id),
         ).toBeTruthy();
       })
       .expect(200);
