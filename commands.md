@@ -44,6 +44,11 @@ yarn add -D @types/passport @types/passport-jwt
 #Create auth service
 nest g service auth
 
+#Create product module
+nest g module product
+nest g controller product
+nest g service product
+
 #Architecture of API
 AppModule
     modules 
